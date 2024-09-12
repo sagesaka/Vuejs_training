@@ -39,3 +39,34 @@ const name = ref("");
 </script>
 
 <!-- ref関数で値を宣言するとその値を常に監視し、データが変更されるとすぐに反映する。(DOMと仮想DOMの差分) -->
+
+<!-- 条件分岐 -->
+<script setup>
+const number = 10;
+</script>
+
+<template>
+  <div>
+    <p v-if="number < 20">
+      numberは20よりも小さいです
+    </p>
+    <p v-else>
+      numberは20よりも大きいです
+    </p>
+  </div>
+</template>
+
+<!-- ループ処理 -->
+<script setup>
+const studentsList = ["山田", "佐藤", "田中"]
+</script>
+
+<template>
+  <ul>
+    <li v-for="student in studentsList" :key="student.id">
+      {{ student.name }}
+    </li>
+  </ul>
+</template>
+
+<!-- 要素を一意に識別するために、key属性を付与するべし -->
