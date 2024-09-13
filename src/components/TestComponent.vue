@@ -70,3 +70,36 @@ const studentsList = ["山田", "佐藤", "田中"]
 </template>
 
 <!-- 要素を一意に識別するために、key属性を付与するべし -->
+
+
+<!-- 子コンポーネントから親コンポーネントへデータを渡す -->
+<template>
+  <button @click="sendMessage">メッセージを送る</button>
+</template>
+
+<script setup>
+import { defineEmits } from "vue";
+
+const emits = defineEmits(["message"]);
+const sendMessage = () => {
+  emits("message", "子コンポーネントから送ります")
+};
+</script>
+
+<!-- 親コンポーネント -->
+<template>
+  <div>
+    <child-component @message="handleMessage"></child-component>
+    <p>{{ receivedMessage }}</p>
+  </div>
+</template>
+
+<script setup>
+import ChildComponent from "./TestComponent7_child.vue";
+import { ref } from "vue";
+const receivedMessage = ref("");
+ 
+const handleMessage = (message) => {
+  receivedMessage.value = message;
+};
+</script>
