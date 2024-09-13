@@ -1,11 +1,9 @@
 <script setup>
-import TestComponent from './components/TestComponent.vue';
+import TodoApp from './components/TodoApp.vue';
 </script>
 
 <template>
   <div>
-    <main>
-      
-    </main>
+    <TodoApp />
   </div>
 </template>
