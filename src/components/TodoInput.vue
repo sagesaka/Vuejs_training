@@ -26,6 +26,8 @@ const isErrMsg = ref(false);
 function onSubmitForm() {
   if (input.value=="" || inputDate.value=="") {
     isErrMsg.value = true;
+    event.preventDefault();
+    return;
   }
   const items = JSON.parse(localStorage.getItem("items")) || [];
 
