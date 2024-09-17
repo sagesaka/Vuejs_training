@@ -9,6 +9,7 @@
         <th class="th-edit">編集</th>
         <th class="th-delete">削除</th>
       </tr>
+      <p v-if="isErrMsg">必須項目を記入してください</p>
       <tr v-for="item in items" :key="item.id">
         <td>{{ item.id }}</td>
         <td>
@@ -32,7 +33,8 @@
           </select>
         </td>
         <td>
-          <button @click="onEdit(item.id)">編集</button>
+          <button v-if="!item.onEdit" @click="onEdit(item.id)">編集</button>
+          <button v-else @click="onUpdate(item.id)">完了</button>
         </td>
         <td>
           <button>削除</button>
@@ -57,5 +59,21 @@ function onEdit(id) {
   inputLimit.value = items.value[id].limit;
   inputState.value = items.value[id].state;
   items.value[id].onEdit = true;
+}
+
+const newItem = {
+  id: id,
+  content: inputContent.value,
+  limit: inputLimit.value,
+  state: inputState.value,
+  onEdit: false,
+};
+
+let isErrMsg = ref(false);
+function onUpdate(id) {
+  if (inputContent.value == "" || inputLimit.value == "") {
+    isErrMsg.value = true;
+    return;
+  }
 }
 </script>
