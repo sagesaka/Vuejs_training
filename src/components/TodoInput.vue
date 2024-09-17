@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form action="">
+    <form @submit="onSubmitForm">
       <label>
         やること<input type="text" v-model="input"/>
       </label>
@@ -17,4 +17,8 @@ import { ref } from "vue";
 
 const input = ref("");
 const inputDate = ref("");
+
+function onSubmitForm() {
+  console.log(input.value)
+}
 </script>
