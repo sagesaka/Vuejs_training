@@ -11,9 +11,26 @@
       </tr>
       <tr v-for="item in items" :key="item.id">
         <td>{{ item.id }}</td>
-        <td>{{ item.content }}</td>
-        <td>{{ item.limit }}</td>
-        <td>{{ item.state.value }}</td>
+        <td>
+          <span v-if="!item.onEdit">{{ item.content }}</span>
+          <input v-else type="text" />
+        </td>
+        <td>
+          <span v-if="!item.onEdit">{{ item.limit }}</span>
+          <input v-else type="date" />
+        </td>
+        <td>
+          <span v-if="!item.onEdit">{{ item.state.value }}</span>
+          <select v-else v-model="inputState">
+            <option
+              v-for="state in statuses"
+              :key="state.id"
+              :value="state"
+              :selected="state.id == item.state.id">
+              {{ state.value }}
+            </option>
+          </select>
+        </td>
         <td>
           <button>編集</button>
         </td>
@@ -26,6 +43,7 @@
 </template>
 
 <script setup>
+import { statuses } from '@/const/status';
 // getItemを使ってローカルストレージからデータを取得
 const items = JSON.parse(localStorage.getItem("items")) || [];
 </script>
