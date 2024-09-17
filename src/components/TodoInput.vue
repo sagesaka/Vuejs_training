@@ -20,6 +20,18 @@ const input = ref("");
 const inputDate = ref("");
 
 function onSubmitForm() {
-  console.log(input.value)
+  const items = JSON.parse(localStorage.getItem("items")) || [];
+
+  const newItem = {
+    id: items.length,
+    content: input.value,
+    limit: inputDate.value,
+    state: statuses.NOT_START,
+    onEdit: false,
+  };
+
+  items.push(newItem);
+
+  localStorage.setItem("items", JSON.stringify(items));
 }
 </script>
