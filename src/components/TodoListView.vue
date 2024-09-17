@@ -13,11 +13,11 @@
         <td>{{ item.id }}</td>
         <td>
           <span v-if="!item.onEdit">{{ item.content }}</span>
-          <input v-else type="text" />
+          <input v-else v-model="inputContent" type="text" />
         </td>
         <td>
           <span v-if="!item.onEdit">{{ item.limit }}</span>
-          <input v-else type="date" />
+          <input v-else v-model="inputLimit" type="date" />
         </td>
         <td>
           <span v-if="!item.onEdit">{{ item.state.value }}</span>
@@ -32,7 +32,7 @@
           </select>
         </td>
         <td>
-          <button>編集</button>
+          <button @click="onEdit(item.id)">編集</button>
         </td>
         <td>
           <button>削除</button>
@@ -44,6 +44,18 @@
 
 <script setup>
 import { statuses } from '@/const/status';
+import { ref } from 'vue';
+
 // getItemを使ってローカルストレージからデータを取得
-const items = JSON.parse(localStorage.getItem("items")) || [];
+let items = ref(JSON.parse(localStorage.getItem("items")) || []);
+let inputContent = ref();
+let inputLimit = ref();
+let inputState = ref();
+
+function onEdit(id) {
+  inputContent.value = items.value[id].content;
+  inputLimit.value = items.value[id].limit;
+  inputState.value = items.value[id].state;
+  items.value[id].onEdit = true;
+}
 </script>
