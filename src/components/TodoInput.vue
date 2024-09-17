@@ -14,6 +14,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { statuses } from "@/const/status";
 
 const input = ref("");
 const inputDate = ref("");
