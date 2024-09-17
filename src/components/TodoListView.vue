@@ -11,9 +11,9 @@
       </tr>
       <tr v-for="item in items" :key="item.id">
         <td>{{ item.id }}</td>
-        <td>{{ item.value }}</td>
+        <td>{{ item.content }}</td>
         <td>{{ item.limit }}</td>
-        <td>{{ item.state }}</td>
+        <td>{{ item.state.value }}</td>
         <td>
           <button>編集</button>
         </td>
