@@ -1,5 +1,8 @@
 <template>
   <div>
+    <p v-if="isErrMsg">
+      必須項目を入力してください
+    </p>
     <form @submit="onSubmitForm">
       <label>
         やること<input type="text" v-model="input"/>
@@ -19,7 +22,13 @@ import { statuses } from "@/const/status";
 const input = ref("");
 const inputDate = ref("");
 
+const isErrMsg = ref(false);
 function onSubmitForm() {
+  if (input.value=="" || inputDate.value=="") {
+    isErrMsg.value = true;
+    event.preventDefault();
+    return;
+  }
   const items = JSON.parse(localStorage.getItem("items")) || [];
 
   const newItem = {
